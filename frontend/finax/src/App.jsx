@@ -4,9 +4,23 @@ import {MainLayout} from "./styles/Layouts.js";
 import Orb from "./components/Orb/orb.jsx";
 import styled from "styled-components";
 import Navigation from "./components/Navigation/navigation.jsx";
+import {useState} from "react";
 
 function App() {
-  const AppStyles = styled.div`
+  const [active,setActive] = useState(1);
+
+  return <AppStyles className="App">
+    <Orb/>
+    <MainLayout>
+        <Navigation active={active} setActive={setActive}/>
+      <main>
+
+      </main>
+    </MainLayout>
+  </AppStyles>
+}
+
+const AppStyles = styled.div`
     height: 100vh;
     position: relative;
     main {
@@ -22,18 +36,5 @@ function App() {
         }
     }
 `
-
-  return <AppStyles className="App">
-    <Orb/>
-    <MainLayout>
-        <Navigation/>
-      <main>
-
-      </main>
-    </MainLayout>
-  </AppStyles>
-}
-
-
 
 export default App

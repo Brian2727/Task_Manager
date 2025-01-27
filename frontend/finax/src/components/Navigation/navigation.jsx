@@ -1,10 +1,32 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from "styled-components";
 import {menuItems} from "../../util/menuItems.jsx";
 
-function Navigation(props) {
+function Navigation({active,setActive}) {
 
-    const NavStyled = styled.div`
+
+    return (
+        <NavStyled>
+            <div className="user-con">
+                <img src="" alt=""/>
+                <div className="text">
+                    <h2>Hello</h2>
+                    <p>User</p>
+                </div>
+            </div>
+            <ul className="menu-item">
+                {menuItems.map((item, index) => {
+                    const {title, icon, link} = item;
+                    return <li key={index} onClick={() => {setActive(index)}} className={active === index ? '' : 'active'}>
+                        {icon}
+                        <span>{title}</span>
+                    </li>
+                })}
+            </ul>
+        </NavStyled>
+    );
+}
+const NavStyled = styled.div`
         padding: 2rem 1.5rem;
         height: 100%;
         width: 374px;
@@ -26,34 +48,28 @@ function Navigation(props) {
             li{
                 display: grid;
                 grid-template-columns: 40px auto;
-                margin: 0.6rem 0;
+                margin: 0.6rem ;
                 font-weight: 500;
                 cursor: pointer;
+                background: #222260;
                 transition: all .4s ease-in-out;
             }
         }
+        .active{
+            
+            i{
+                color: transparent;
+            }
+            &::before{
+                position: absolute;
+                content: "";
+                left: 0;
+                top: 0;
+                width: 1px;
+                height: 100%;
+                border-radius: 0 10px 10px;
+            }
+        }
     `
-
-
-    return (
-        <NavStyled>
-            <div className="user-con">
-                <img src="" alt=""/>
-                <div className="text">
-                    <h2>Hello</h2>
-                    <p>User</p>
-                </div>
-            </div>
-            <ul className="menu-items">
-                {menuItems.map((item, index) => {
-                    const {title, icon, link} = item;
-                    return <li key={index} className="menu-item">
-                        <a href={link}>{icon}<span>{title}</span></a>
-                    </li>
-                })}
-            </ul>
-        </NavStyled>
-    );
-}
 
 export default Navigation;
